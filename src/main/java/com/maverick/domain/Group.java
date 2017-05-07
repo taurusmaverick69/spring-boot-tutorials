@@ -1,16 +1,17 @@
 package com.maverick.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
 @Entity
 @Table(name = "`group`")
-@Getter
-@Setter
-public class Group extends com.maverick.domain.Entity {
+public class Group {
 
+    @Id
+    private int id;
     private String name;
 }
