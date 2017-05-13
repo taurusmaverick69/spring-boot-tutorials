@@ -19,6 +19,7 @@ public class GroupControllerTest {
 
     @InjectMocks
     private GroupController controller;
+
     @Test
     public void findAllTest() {
         when(groupService.findAll()).thenReturn(ImmutableList.of());

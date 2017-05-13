@@ -12,7 +12,7 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @GetMapping
+    @GetMapping("/group")
     public Iterable<Group> findAll() {
         return groupService.findAll();
     }
