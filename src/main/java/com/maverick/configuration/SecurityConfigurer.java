@@ -27,13 +27,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/loxout"))
-//                .logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
-//                    httpServletResponse.getWriter().write(authentication.getName());
-//                })
-                //    .logoutSuccessUrl("/complete")
-                
-                .permitAll();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
     }
 
     @Autowired
