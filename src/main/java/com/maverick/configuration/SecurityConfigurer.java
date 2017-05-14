@@ -1,16 +1,22 @@
 package com.maverick.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
+
+    @Qualifier("dataSource")
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -19,13 +25,16 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
-                .failureForwardUrl("/login6666");
-//                .and()
-//                .logout().permitAll();
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/loxout"))
+//                .logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
+//                    httpServletResponse.getWriter().write(authentication.getName());
+//                })
+                //    .logoutSuccessUrl("/complete")
+                
+                .permitAll();
     }
-
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
