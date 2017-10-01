@@ -12,18 +12,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GroupControllerTest {
+public class MainControllerTest {
 
     @Mock
     private GroupService groupService;
 
     @InjectMocks
-    private GroupController controller;
+    private MainController controller;
 
     @Test
     public void findAllTest() {
         when(groupService.findAll()).thenReturn(ImmutableList.of());
-        controller.findAll();
         verify(groupService).findAll();
     }
 }
